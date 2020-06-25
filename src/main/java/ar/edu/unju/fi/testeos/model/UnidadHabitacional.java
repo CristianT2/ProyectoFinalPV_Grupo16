@@ -1,5 +1,11 @@
 package ar.edu.unju.fi.testeos.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import org.springframework.stereotype.Component;
 
 import ar.edu.unju.fi.trackpersonas.model.Barrio;
@@ -11,6 +17,7 @@ import ar.edu.unju.fi.trackpersonas.model.Barrio;
  */
 
 @Component
+@Entity
 public class UnidadHabitacional {
 	
 	/*
@@ -22,11 +29,18 @@ public class UnidadHabitacional {
 	/**
 	 * Atributo que representa la direccion de una vivienda.
 	 */
-	String direccion;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private Long id;
+	@Column(name = "DIRECCION")
+	private String direccion;
 	/**
 	 * Atributo que representa el barrio donde esta ubicada de una vivienda.
 	 */
-	Barrio barrio;
+	
+	@Column(name = "BARRIO")
+	private Barrio barrio;
 	
 	/*
 	 *---------------------------------
@@ -88,6 +102,14 @@ public class UnidadHabitacional {
 	 */
 	public void setBarrio(Barrio barrio) {
 		this.barrio = barrio;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	//Metodo que retorna una cadena de texto con los valores de los atributos

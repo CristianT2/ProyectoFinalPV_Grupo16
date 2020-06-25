@@ -6,7 +6,7 @@ public interface IUsuarioDAO {
 
 	public void guardar();
 	public Usuario mostrar();
-	public void elimninar();
+	public void eliminar();
 	public Usuario modificar();
 	
 }

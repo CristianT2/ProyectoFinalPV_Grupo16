@@ -24,7 +24,7 @@ public class UsuarioDAOImp implements IUsuarioDAO {
 	}
 
 	@Override
-	public void elimninar() {
+	public void eliminar() {
 		// TODO Auto-generated method stub
 
 	}

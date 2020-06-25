@@ -1,5 +1,11 @@
 package ar.edu.unju.fi.trackpersonas.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @author Torrejon Cristian
  * @version 1.0
  */
-
+@Entity
 @Component
 public class Barrio {
 
@@ -17,11 +23,16 @@ public class Barrio {
 	 *-------- atributos --------------
 	 *---------------------------------
 	 */
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private Long id;
 	/**
 	 * Atributo que representa el nombre del Barrio.
 	 */
-	String nombre;
+	
+	@Column(name = "NOMBRE")
+	private String nombre; 
 	
 	/*
 	 *---------------------------------
@@ -64,6 +75,14 @@ public class Barrio {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	//Metodo que retorna una cadena de texto con los valores de los atributos

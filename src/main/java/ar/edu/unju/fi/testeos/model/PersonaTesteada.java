@@ -1,5 +1,15 @@
 package ar.edu.unju.fi.testeos.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,7 +19,11 @@ import org.springframework.stereotype.Component;
  * @author Torrejon Cristian
  * @version 1.0
  */
+
 @Component
+@Entity
+@Table(name = "personas")
+
 public class PersonaTesteada {
 	
 	/*
@@ -17,23 +31,31 @@ public class PersonaTesteada {
 	 *-------- atributos --------------
 	 *---------------------------------
 	 */
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private Long id;
 	/**
 	 * Atributo que representa el dni de la persona testeada.
 	 */
-	String documento;
+	@ManyToOne( fetch =FetchType.LAZY)
+	@JoinColumn( name = "DOCUMENTO")
+	private String documento;
 	/**
 	 * Atributo que representa el apellido de la persona testeada.
 	 */
-	String apellido;
+	@Column ( name = "APELLIDO")
+	private String apellido;
 	/**
 	 * Atributo que representa el o los nombres de la persona testeada.
 	 */
-	String nombres;
+	@Column ( name = "NOMBRES" , length = 150, nullable = true)
+	private String nombres;
 	/**
 	 * Atributo que representa el resultado del testeo de la persona testeada.
 	 */
-	String resultadoTesteo;
+	@Column ( name = "RESULTADO")
+	private String resultadoTesteo;
 	
 	/*
 	 *---------------------------------
@@ -143,6 +165,16 @@ public class PersonaTesteada {
 	public void setResultadoTesteo(String resultadoTesteo) {
 		this.resultadoTesteo = resultadoTesteo;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 
 	//Metodo que retorna una cadena de texto con los valores de los atributos
 	@Override

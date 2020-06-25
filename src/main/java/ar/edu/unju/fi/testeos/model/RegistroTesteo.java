@@ -3,6 +3,15 @@ package ar.edu.unju.fi.testeos.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +23,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Entity
 public class RegistroTesteo {
 
 	/*
@@ -21,17 +31,23 @@ public class RegistroTesteo {
 	 *-------- atributos --------------
 	 *---------------------------------
 	 */
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private Long id;
 	/**
 	 * Atributo que representa la fecha y hora dentro del registro de testeo.
 	 */
-	LocalDateTime fechaHora;
+	@Column ( name = "FECHA/HORA")
+	private LocalDateTime fechaHora;
 
 	/**
 	 * Atributo que representa la vivienda dentro del registro de testeo.
 	 */
 	@Autowired
-	UnidadHabitacional unidadHabitacional;
+	@OneToMany(mappedBy = "documento" , cascade = CascadeType.ALL) 
+	@JoinColumn ( name = "VIVIENDA")
+	private UnidadHabitacional unidadHabitacional;
 	/**
 	 * Atributo que representa una lista de personas dentro del registro de testeo.
 	 */
@@ -118,6 +134,14 @@ public class RegistroTesteo {
 	 */
 	public void setPersonasTesteadas(List<PersonaTesteada> personasTesteadas) {
 		this.personasTesteadas = personasTesteadas;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	//Metodo que retorna una cadena de texto con los valores de los atributos

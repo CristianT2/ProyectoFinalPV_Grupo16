@@ -1,5 +1,11 @@
 package ar.edu.unju.fi.tracking.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,6 +14,7 @@ import org.springframework.stereotype.Component;
  * @author Torrejon Cristian
  * @version 1.0
  */
+@Entity
 @Component
 public class Usuario {
 	
@@ -16,27 +23,35 @@ public class Usuario {
 	 *-------- atributos --------------
 	 *---------------------------------
 	 */
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private Long id;
 	/**
 	 * Atributo que representa el nombre del Usuario.
 	 */
-	String nombreUsuario;
+	@Column (name = " NOMBRE ", length = 150, nullable = true)
+	private String nombreUsuario;
 	/**
 	 * Atributo que representa el password del Usuario.
 	 */
-	String password;
+	@Column (name = "PASSWORD")
+	private String password;
 	/**
 	 * Atributo que representa el nombre real del Usuario.
 	 */
-	String nombreReal;
+	@Column(name = "NOMBRE REAL")
+	private String nombreReal;
 	/**
 	 * Atributo que representa el apellido real del Usuario.
 	 */
-	String apellidoReal;
+	@Column (name = " APELLIDO REAL")
+	private String apellidoReal;
 	/**
 	 * Atributo que representa el tipo de Usuario.
 	 */
-	String tipoUsuario;     //Consultor-Registrador-Bd
+	@Column(name = "TIPO DE USUARIO")
+	private String tipoUsuario;     //Consultor-Registrador-Bd
 	
 	/*
 	 *---------------------------------
@@ -155,6 +170,14 @@ public class Usuario {
 	 */
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	//Metodo que retorna una cadena de texto con los valores de los atributos
