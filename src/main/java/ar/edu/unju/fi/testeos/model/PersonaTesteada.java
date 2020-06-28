@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.testeos.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,21 +18,27 @@ import org.springframework.stereotype.Component;
  *  Clase que representa a una persona testeada
  * durante la pandemia para saber si dicha persona
  * se contagio de covid-19.
- * @author Torrejon Cristian
+ * @author 
  * @version 1.0
  */
 
 @Component
 @Entity
-@Table(name = "personas")
+@Table(name = "PERSONAS")
 
-public class PersonaTesteada {
-	
+public class PersonaTesteada implements Serializable {
+	private static final long serialVersionUID = 1L;
 	/*
 	 *---------------------------------
 	 *-------- atributos --------------
 	 *---------------------------------
 	 */
+	 
+	 
+	@ManyToOne( fetch = FetchType.LAZY)
+	@JoinColumn(name= "REGISTRO_TESTEO")
+	private RegistroTesteo testeo; 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -38,8 +46,8 @@ public class PersonaTesteada {
 	/**
 	 * Atributo que representa el dni de la persona testeada.
 	 */
-	@ManyToOne( fetch =FetchType.LAZY)
-	@JoinColumn( name = "DOCUMENTO")
+
+	@Column( name = "DOCUMENTO")
 	private String documento;
 	/**
 	 * Atributo que representa el apellido de la persona testeada.
@@ -56,20 +64,20 @@ public class PersonaTesteada {
 	 */
 	@Column ( name = "RESULTADO")
 	private String resultadoTesteo;
-	
+
 	/*
 	 *---------------------------------
 	 *-------- constructores --------------
 	 *---------------------------------
 	 */
 	/**
-	 * Constructor por defecto
+	 * Constructor vacio
 	 */
-	
+
 	public PersonaTesteada() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
-	
+
 
 	/**
 	 * Constructor Parametrizado

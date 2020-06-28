@@ -1,10 +1,16 @@
 package ar.edu.unju.fi.testeos.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
@@ -18,7 +24,9 @@ import ar.edu.unju.fi.trackpersonas.model.Barrio;
 
 @Component
 @Entity
-public class UnidadHabitacional {
+@Table (name = "UNIDAD_HABITACIONALES")
+public class UnidadHabitacional implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	/*
 	 *---------------------------------
@@ -38,8 +46,8 @@ public class UnidadHabitacional {
 	/**
 	 * Atributo que representa el barrio donde esta ubicada de una vivienda.
 	 */
-	
-	@Column(name = "BARRIO")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "BARRIO" , nullable = false )
 	private Barrio barrio;
 	
 	/*

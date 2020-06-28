@@ -1,10 +1,13 @@
 package ar.edu.unju.fi.tracking.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
@@ -14,9 +17,11 @@ import org.springframework.stereotype.Component;
  * @author Torrejon Cristian
  * @version 1.0
  */
-@Entity
 @Component
-public class Usuario {
+@Entity
+@Table (name="USUARIOS")
+ public class Usuario implements Serializable {
+	private static final long serialVersionUID =1L ;
 	
 	/*
 	 *---------------------------------
@@ -40,17 +45,17 @@ public class Usuario {
 	/**
 	 * Atributo que representa el nombre real del Usuario.
 	 */
-	@Column(name = "NOMBRE REAL")
+	@Column(name = "NOMBRE_REAL")
 	private String nombreReal;
 	/**
 	 * Atributo que representa el apellido real del Usuario.
 	 */
-	@Column (name = " APELLIDO REAL")
+	@Column (name = " APELLIDO_REAL")
 	private String apellidoReal;
 	/**
 	 * Atributo que representa el tipo de Usuario.
 	 */
-	@Column(name = "TIPO DE USUARIO")
+	@Column(name = "TIPO_DE_USUARIO")
 	private String tipoUsuario;     //Consultor-Registrador-Bd
 	
 	/*

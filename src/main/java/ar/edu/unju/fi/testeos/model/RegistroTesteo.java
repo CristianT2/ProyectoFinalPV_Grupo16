@@ -1,18 +1,22 @@
 package ar.edu.unju.fi.testeos.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,8 +28,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-public class RegistroTesteo {
-
+@Table (name = "REGISTROS_TESTEO")
+public class RegistroTesteo implements Serializable {
+private static final long serialVersionUID = 1L;
 	/*
 	 *---------------------------------
 	 *-------- atributos --------------
@@ -38,21 +43,22 @@ public class RegistroTesteo {
 	/**
 	 * Atributo que representa la fecha y hora dentro del registro de testeo.
 	 */
-	@Column ( name = "FECHA/HORA")
+	@Column ( name = "FECHA_HORA")
 	private LocalDateTime fechaHora;
 
 	/**
 	 * Atributo que representa la vivienda dentro del registro de testeo.
 	 */
-	@Autowired
-	@OneToMany(mappedBy = "documento" , cascade = CascadeType.ALL) 
-	@JoinColumn ( name = "VIVIENDA")
+    @ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn ( name = "UNIDAD_HABITACIONAL")
 	private UnidadHabitacional unidadHabitacional;
 	/**
 	 * Atributo que representa una lista de personas dentro del registro de testeo.
 	 */
-	@Autowired
-	List<PersonaTesteada> personasTesteadas;
+	
+	//@Autowired
+    @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER )
+	private List<PersonaTesteada> personasTesteadas = new ArrayList<PersonaTesteada>();
 	
 	/*
 	 *---------------------------------
@@ -60,10 +66,10 @@ public class RegistroTesteo {
 	 *---------------------------------
 	 */
 	/**
-	 * Constructor por defecto
+	 * Constructor vacío
 	 */
 	public RegistroTesteo() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**
@@ -82,6 +88,7 @@ public class RegistroTesteo {
 		this.personasTesteadas = personasTesteadas;
 	}
 	
+
 	/*
 	 *---------------------------------
 	 *-------- metodos accesores --------------

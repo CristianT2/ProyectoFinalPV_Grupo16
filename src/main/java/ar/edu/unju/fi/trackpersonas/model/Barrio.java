@@ -1,12 +1,18 @@
 package ar.edu.unju.fi.trackpersonas.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+
 
 /**
  * Clase que representa el nombre de un barrio 
@@ -16,7 +22,9 @@ import org.springframework.stereotype.Component;
  */
 @Entity
 @Component
-public class Barrio {
+@Table( name = "BARRIOS")
+public class Barrio implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/*
 	 *---------------------------------
@@ -33,6 +41,7 @@ public class Barrio {
 	
 	@Column(name = "NOMBRE")
 	private String nombre; 
+
 	
 	/*
 	 *---------------------------------
@@ -43,10 +52,9 @@ public class Barrio {
 	 * Constructor por defecto
 	 */
 	public Barrio() {
-		// TODO Auto-generated constructor stub
+		super();   // TODO Auto-generated constructor stub
 	}
-
-	/**
+     /**
 	 * Constructor Parametrizado
 	 * @param nombre valor del nombre del Barrio.
 	 */
