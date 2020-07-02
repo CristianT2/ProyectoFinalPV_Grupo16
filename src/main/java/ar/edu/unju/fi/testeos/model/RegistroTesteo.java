@@ -1,9 +1,22 @@
 package ar.edu.unju.fi.testeos.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,29 +27,38 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class RegistroTesteo {
-
+@Entity
+@Table (name = "REGISTROS_TESTEO")
+public class RegistroTesteo implements Serializable {
+private static final long serialVersionUID = 1L;
 	/*
 	 *---------------------------------
 	 *-------- atributos --------------
 	 *---------------------------------
 	 */
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private Long id;
 	/**
 	 * Atributo que representa la fecha y hora dentro del registro de testeo.
 	 */
-	LocalDateTime fechaHora;
+	@Column ( name = "FECHA_HORA")
+	private LocalDateTime fechaHora;
 
 	/**
 	 * Atributo que representa la vivienda dentro del registro de testeo.
 	 */
-	@Autowired
-	UnidadHabitacional unidadHabitacional;
+    @ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn ( name = "UNIDAD_HABITACIONAL")
+	private UnidadHabitacional unidadHabitacional;
 	/**
 	 * Atributo que representa una lista de personas dentro del registro de testeo.
 	 */
-	@Autowired
-	List<PersonaTesteada> personasTesteadas;
+	
+	//@Autowired
+    @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER )
+	private List<PersonaTesteada> personasTesteadas = new ArrayList<PersonaTesteada>();
 	
 	/*
 	 *---------------------------------
@@ -44,10 +66,10 @@ public class RegistroTesteo {
 	 *---------------------------------
 	 */
 	/**
-	 * Constructor por defecto
+	 * Constructor vacío
 	 */
 	public RegistroTesteo() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**
@@ -66,6 +88,7 @@ public class RegistroTesteo {
 		this.personasTesteadas = personasTesteadas;
 	}
 	
+
 	/*
 	 *---------------------------------
 	 *-------- metodos accesores --------------
@@ -120,11 +143,18 @@ public class RegistroTesteo {
 		this.personasTesteadas = personasTesteadas;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	//Metodo que retorna una cadena de texto con los valores de los atributos
 	@Override
 	public String toString() {
 		return "RegistroTesteo [fechaHora=" + fechaHora + ", unidadHabitacional=" + unidadHabitacional
 				+ ", personasTesteadas=" + personasTesteadas + "]";
 	}
-	
 }

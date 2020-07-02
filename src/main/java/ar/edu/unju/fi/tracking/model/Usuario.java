@@ -1,5 +1,18 @@
 package ar.edu.unju.fi.tracking.model;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,7 +22,9 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  */
 @Component
-public class Usuario {
+@Entity
+@Table(name = "USUARIOS")
+public class Usuario implements Serializable{
 	
 	/*
 	 *---------------------------------
@@ -18,25 +33,40 @@ public class Usuario {
 	 */
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name= "ID")
+	private Long id;
+	
+	/**
 	 * Atributo que representa el nombre del Usuario.
 	 */
-	String nombreUsuario;
+	@Column(name= "NOMBRE_USUARIO", length = 20, nullable = true)
+	private String nombreUsuario;
 	/**
 	 * Atributo que representa el password del Usuario.
 	 */
-	String password;
+	@Column(name = "PASSWORD", length = 15,nullable = true)
+	private String password;
 	/**
 	 * Atributo que representa el nombre real del Usuario.
 	 */
-	String nombreReal;
+	@Column(name = "NOMBRE_REAL", length = 40, nullable = true)
+	private String nombreReal;
 	/**
 	 * Atributo que representa el apellido real del Usuario.
 	 */
-	String apellidoReal;
+	@Column(name = "APELLIDO_REAL", length = 20, nullable = true)
+	private String apellidoReal;
 	/**
 	 * Atributo que representa el tipo de Usuario.
 	 */
-	String tipoUsuario;     //Consultor-Registrador-Bd
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private List<Rol>roles;     //Consultor-Registrador-Bd
 	
 	/*
 	 *---------------------------------
@@ -49,16 +79,16 @@ public class Usuario {
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	/**
 	 * Constructor Parametrizado
 	 * @param nombreUsuario Valor para el nombre del usuario
 	 * @param password Valor para el password del usuario
 	 * @param nombreReal Valor para el nombre real del usuario
 	 * @param apellidoReal Valor para el apellido real del usuario
-	 * @param tipoUsuario Valor para el tipo de usuario
+	 * @param roles Valor para la lista de roles
 	 */
-	public Usuario(String nombreUsuario, String password, String nombreReal, String apellidoReal, String tipoUsuario) {
+	public Usuario(String nombreUsuario, String password, String nombreReal, String apellidoReal, List<Rol> roles) {
 		//asignacion del parametro nombreUsuario al atributo nombreUsuario.
 		this.nombreUsuario = nombreUsuario;
 		//asignacion del parametro password al atributo password.
@@ -67,8 +97,8 @@ public class Usuario {
 		this.nombreReal = nombreReal;
 		//asignacion del parametro apellidoReal al atributo apellidoReal.
 		this.apellidoReal = apellidoReal;
-		//asignacion del parametro tipoUsuario al atributo tipoUsuario.
-		this.tipoUsuario = tipoUsuario;
+		//asignacion del parametro roles al atributo roles.
+		this.roles = roles;
 	}
 
 	/*
@@ -76,7 +106,20 @@ public class Usuario {
 	 *-------- metodos accesores --------------
 	 *---------------------------------
 	 */
-	
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
 	/**
 	 * retorna el nombre del usuario
 	 * @return the nombreUsuario
@@ -141,27 +184,33 @@ public class Usuario {
 		this.apellidoReal = apellidoReal;
 	}
 
+	
+	
+
+	
+	
+
 	/**
-	 * retorna el tipo de usuario
-	 * @return the tipoUsuario
+	 * retorna los roles del usuario
+	 * @return the roles
 	 */
-	public String getTipoUsuario() {
-		return tipoUsuario;
+	public List<Rol> getRoles() {
+		return roles;
 	}
 
 	/**
-	 * asigna un valor al tipo de usuario
-	 * @param tipoUsuario the tipoUsuario to set
+	 * asigna un valor a los roles de el usuario
+	 * @param roles the roles to set
 	 */
-	public void setTipoUsuario(String tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
 	}
-
+	
 	//Metodo que retorna una cadena de texto con los valores de los atributos
 	@Override
 	public String toString() {
 		return "Usuario [nombreUsuario=" + nombreUsuario + ", password=" + password + ", nombreReal=" + nombreReal
-				+ ", apellidoReal=" + apellidoReal + ", tipoUsuario=" + tipoUsuario + "]";
+				+ ", apellidoReal=" + apellidoReal + ", roles=" + roles + "]";
 	}
 	
 }
