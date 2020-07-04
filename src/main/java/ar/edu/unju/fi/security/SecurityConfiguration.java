@@ -1,0 +1,66 @@
+package ar.edu.unju.fi.security;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import ar.edu.unju.fi.service.IUsuarioService;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
+	private IUsuarioService usuarioService;
+	
+	@Override
+	protected void configure(final AuthenticationManagerBuilder autenticacion) throws Exception{
+		autenticacion.inMemoryAuthentication()
+        .withUser("AdminBD").password(passwordEncoder().encode("adminbd")).roles("ADMINBD")
+        .and()
+        .withUser("Consultor").password(passwordEncoder().encode("consultor")).roles("CONSULTOR")
+        .and()
+        .withUser("Registrador").password(passwordEncoder().encode("registrador")).roles("REGISTRADOR");
+	}
+
+	 @Bean
+	    public PasswordEncoder passwordEncoder() {
+	        return new BCryptPasswordEncoder();
+	    }
+
+	 @Bean
+	 public DaoAuthenticationProvider authenticationProvider() {
+		 DaoAuthenticationProvider auth= new DaoAuthenticationProvider();
+		 auth.setUserDetailsService(usuarioService);
+		 auth.setPasswordEncoder(passwordEncoder());
+		 return auth;
+	 }
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception{
+		http
+				.authorizeRequests()
+				.antMatchers("/login").permitAll()
+				.antMatchers("/adminBd/**").hasAuthority("ADMINBD")
+				.antMatchers("/consultor/**").hasAnyAuthority("CONSULTOR","ADMINBD")
+				.antMatchers("/registrador/**").hasAnyAuthority("REGISTRADOR","ADMINBD")
+				.anyRequest().authenticated()
+				.and()
+				.formLogin()
+				.loginPage("/login").failureUrl("/login?error=true")
+				.loginProcessingUrl("/login")
+				.usernameParameter("username")
+				.passwordParameter("password");
+	}
+	
+	
+	
+	
+}
