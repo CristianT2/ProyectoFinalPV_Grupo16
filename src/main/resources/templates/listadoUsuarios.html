@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body class="container">
+<div th:insert="layout/header :: header"></div>
+<a th:href="@{/usuarios}" class="btn btn-danger">Agregar Usuario</a>
+<div><h1>LISTADO DE USUARIOS</h1></div>
+<div th:insert="layout/footer :: footer"></div>
+  <script type="text/javascript" href="webjars/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" href="webjars/popper.js/1.16.0/popper.min.js"></script>
+  <script type="text/javascript" href="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

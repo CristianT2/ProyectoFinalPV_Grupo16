@@ -1,38 +1,163 @@
 package ar.edu.unju.fi.tracking.repository;
 
-import org.slf4j.Logger;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
-import org.slf4j.LoggerFactory;
-import ar.edu.unju.fi.ProyectoFinalPvGrupo16Application;
+
 import ar.edu.unju.fi.tracking.model.Usuario;
 
 @Repository("usuarioDAOImp")
 public class UsuarioDAOImp implements IUsuarioDAO {
-	
-	public static Logger LOG= LoggerFactory.getLogger(ProyectoFinalPvGrupo16Application.class);
+//Autowired
+	public Usuario usuario;
 
 	@Override
-	public void guardar() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Usuario mostrar() {
+	public List<Usuario> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void eliminar() {
+	public List<Usuario> findAll(Sort sort) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Usuario> findAllById(Iterable<Long> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Usuario> List<S> saveAll(Iterable<S> entities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void flush() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public Usuario modificar() {
+	public <S extends Usuario> S saveAndFlush(S entity) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void deleteInBatch(Iterable<Usuario> entities) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteAllInBatch() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Usuario getOne(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Usuario> List<S> findAll(Example<S> example) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Usuario> List<S> findAll(Example<S> example, Sort sort) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Usuario> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Usuario> S save(S entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<Usuario> findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean existsById(Long id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public long count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(Usuario entity) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteAll(Iterable<? extends Usuario> entities) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public <S extends Usuario> Optional<S> findOne(Example<S> example) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Usuario> Page<S> findAll(Example<S> example, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Usuario> long count(Example<S> example) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public <S extends Usuario> boolean exists(Example<S> example) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

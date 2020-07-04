@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body class="container">
+	<div th:insert="layout/header :: header"></div>
+	<form class="container jumbotron">
+		<p>
+			<b>Usuario registrador</b>
+		</p>
+		<div class="form-row w-100">
+			<div class="form-row col-12 w-100">
+				<div class="col-md-6 mb-3">
+					<label for="direccion">Dirección</label> <input type="text"
+						class="form-control" id="direccion" placeholder="Dirección"
+						required>
+				</div>
+				<div class="col-md-6 mb-3">
+					<label for="barrio">Barrio</label> <input type="text"
+						class="form-control" id="barrio" placeholder="Barrio" required>
+				</div>
+			</div>
+			<div class="col-md-4 mb-3">
+				<label for="dni">DNI</label> <input type="number"
+					class="form-control" id="dni" placeholder="99.999.999" required>
+			</div>
+			<div class="col-md-4 mb-3">
+				<label for="nombre">Nombre</label> <input type="text"
+					class="form-control" id="nombre" placeholder="Nombre" required>
+			</div>
+			<div class="col-md-4 mb-3">
+				<label for="apellido">Apellido</label> <input type="text"
+					class="form-control" id="apellido" placeholder="Apellido" required>
+			</div>
+			<div class="col-md-4 mb-3">
+				<label for="resultado-testeo">Resultado Testeo</label><br>
+				<div class="custom-control custom-radio custom-control-inline">
+					<input type="radio" id="positivo" name="resultadoTesteo"
+						class="custom-control-input"> <label
+						class="custom-control-label" for="positivo">Positivo</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+					<input type="radio" id="negativo" name="resultadoTesteo"
+						class="custom-control-input"> <label
+						class="custom-control-label" for="negativo">Negativo</label>
+				</div>
+			</div>
+		</div>
+		<button id="id-submit" class="btn btn-danger" type="submit">Guardar
+			Datos</button>
+	</form>
+
+	<form class="container jumbotron">
+		<p>
+			<b>Usuario Consultor (Busqueda por Barrio)</b>
+		</p>
+		<div class="form-row">
+			<div class="col-md-4 mb-3">
+				<label for="barrio">Barrio</label> <select class="form-control">
+					<option>Ninguna opcion seleccionada</option>
+					<option>Coronel Arias</option>
+					<option>El Chingo</option>
+					<option>Campo Verde</option>
+					<option>Chijra</option>
+					<option>Alto Comedero</option>
+					<option>Alto la Viña</option>
+					<option>Los Perales</option>
+				</select>
+			</div>
+			<div class="col-md-4 mb-3">
+				<label for="fecha">Fecha</label> <input type="date"
+					class="form-control" id="fecha" placeholder="dd-mm-aaaa" required>
+			</div>
+			<div class="col-md-4 mb-3">
+				<label for="hora">Hora</label> <input type="time"
+					class="form-control" id="hora" placeholder="hh:mm" required>
+			</div>
+
+			<div class="col-md-4 mb-3">
+				<label for="total-personas">Cantidad Total de Personas</label> <input
+					type="number" class="form-control" id="total-personas"
+					placeholder="" readonly>
+			</div>
+			<div class="col-md-4 mb-3">
+				<label for="casos-positivos">Casos Positivos</label> <input
+					type="number" class="form-control" id="casos-positivos"
+					placeholder="" readonly>
+			</div>
+			<div class="col-md-4 mb-3">
+				<label for="casos-negativos">Casos Negativos</label> <input
+					type="number" class="form-control" id="casos-negativos"
+					placeholder="" readonly>
+			</div>
+
+			<div class="col-md-12 mb-3 bg-light">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">DIRECCION</th>
+							<th scope="col">NOMBRE</th>
+							<th scope="col">APELLIDO</th>
+							<th scope="col">DNI</th>
+							<th scope="col">RESULTADO</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">Magallanes 160</th>
+							<td>Fu</td>
+							<td>Lanito</td>
+							<td>99.999.999</td>
+							<td>positivo</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</form>
+
+	<form class="container jumbotron" action="">
+		<p>
+			<b>Usuario Consultor (Busqueda por DNI o Apellido)</b>
+		</p>
+		<div class="form-row">
+			<div class="col-md-4 mb-3">
+				<label for="dni-input">DNI</label> <input type="number"
+					class="form-control" id="dni-input" placeholder="99.999.999">
+			</div>
+			<div class="col-md-4 mb-3">
+				<label for="apellido-input">Apellido</label> <input type="text"
+					class="form-control" id="apellido-input" placeholder="Apellido">
+			</div>
+		</div>
+		<button class="btn btn-primary mb-3" type="submit">Buscar</button>
+		<div class="col-md-12 mb-3 bg-light">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">NOMBRE</th>
+						<th scope="col">APELLIDO</th>
+						<th scope="col">DNI</th>
+						<th scope="col">DIRECCION</th>
+						<th scope="col">RESULTADO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Fu</td>
+						<td>Lanito</td>
+						<td>99.999.999</td>
+						<td>Magallanes 160</td>
+						<td>positivo</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</form>
+
+
+	<div class="container jumbotron">
+		<p>
+			<b>Usuario BD</b>
+		</p>
+		<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-alta">Alta</button> -->
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#modal-alta">Alta</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#modal-baja">Baja</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#modal-modificacion">Modificacion</button>
+
+
+		<div id="modal-alta" class="modal fade bd-example-modal-xl"
+			tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+
+					<form class="container jumbotron m-0">
+						<p>
+							<b>Alta</b>
+						</p>
+						<div class="form-row w-100">
+							<div class="form-row col-12 w-100">
+								<div class="col-md-6 mb-3">
+									<label for="direccion">Dirección</label> <input type="text"
+										class="form-control" id="direccion" placeholder="Dirección"
+										required>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label for="barrio">Barrio</label> <input type="text"
+										class="form-control" id="barrio" placeholder="Barrio" required>
+								</div>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="dni">DNI</label> <input type="number"
+									class="form-control" id="dni" placeholder="99.999.999" required>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="nombre">Nombre</label> <input type="text"
+									class="form-control" id="nombre" placeholder="Nombre" required>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="apellido">Apellido</label> <input type="text"
+									class="form-control" id="apellido" placeholder="Apellido"
+									required>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="resultado-testeo">Resultado Testeo</label><br>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" id="positivo" name="resultadoTesteo"
+										class="custom-control-input"> <label
+										class="custom-control-label" for="positivo">Positivo</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" id="negativo" name="resultadoTesteo"
+										class="custom-control-input"> <label
+										class="custom-control-label" for="negativo">Negativo</label>
+								</div>
+							</div>
+						</div>
+						<button id="id-submit" class="btn btn-danger mb-3" type="submit">Guardar
+							Datos</button>
+					</form>
+
+
+				</div>
+			</div>
+		</div>
+		<div id="modal-baja" class="modal fade bd-example-modal-xl"
+			tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<form class="container jumbotron m-0" action="">
+						<p>
+							<b>Baja</b>
+						</p>
+						<p>Buscar por Dni</p>
+						<div class="form-row">
+							<div class="col-md-4 mb-3">
+								<label for="dni-input">DNI</label> <input type="number"
+									class="form-control" id="dni-input" placeholder="99.999.999">
+							</div>
+						</div>
+						<button class="btn btn-primary mb-3" type="submit">Buscar</button>
+						<div class="col-md-12 mb-3 bg-light">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">NOMBRE</th>
+										<th scope="col">APELLIDO</th>
+										<th scope="col">DNI</th>
+										<th scope="col">DIRECCION</th>
+										<th scope="col">RESULTADO</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Fu</td>
+										<td>Lanito</td>
+										<td>99.999.999</td>
+										<td>Magallanes 160</td>
+										<td>positivo</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<button class="btn btn-danger mb-3">Eliminar</button>
+						<button class="btn btn-primary mb-3">Cancelar</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+		<div id="modal-modificacion" class="modal fade bd-example-modal-xl"
+			tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<form class="container jumbotron m-0" action="">
+						<p>
+							<b>Modificacion</b>
+						</p>
+						<p>Buscar por Dni</p>
+						<div class="form-row">
+							<div class="col-md-4 mb-3">
+								<label for="dni-input">DNI</label> <input type="number"
+									class="form-control" id="dni-input" placeholder="99.999.999">
+							</div>
+						</div>
+						<button class="btn btn-primary mb-3" type="submit">Buscar</button>
+						<div class="col-md-12 mb-3 bg-light">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">NOMBRE</th>
+										<th scope="col">APELLIDO</th>
+										<th scope="col">DNI</th>
+										<th scope="col">DIRECCION</th>
+										<th scope="col">RESULTADO</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Fu</td>
+										<td>Lanito</td>
+										<td>99.999.999</td>
+										<td>Magallanes 160</td>
+										<td>positivo</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<button class="btn btn-danger mb-3">Modificar</button>
+						<button class="btn btn-danger mb-3">Cancelar</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+
+	<div th:insert="layout/footer :: footer"></div>
+	<script type="text/javascript"
+		href="webjars/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		href="webjars/popper.js/1.16.0/popper.min.js"></script>
+	<script type="text/javascript"
+		href="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

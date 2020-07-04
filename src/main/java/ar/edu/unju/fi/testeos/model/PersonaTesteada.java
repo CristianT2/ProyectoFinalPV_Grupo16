@@ -18,14 +18,14 @@ import org.springframework.stereotype.Component;
  *  Clase que representa a una persona testeada
  * durante la pandemia para saber si dicha persona
  * se contagio de covid-19.
- * @author 
+ * @author Mamani Cinthia Agustina
  * @version 1.0
  */
 
 @Component
 @Entity
 @Table(name = "PERSONAS")
-
+//  Crea la clase persona Testeada
 public class PersonaTesteada implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/*
@@ -37,11 +37,17 @@ public class PersonaTesteada implements Serializable {
 	 
 	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name= "REGISTRO_TESTEO")
+	/**
+	 * Atributo que representa el registro de testeo
+	 */
 	private RegistroTesteo testeo; 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
+	/**
+	 * Atributo que presenta id el indentificador de la persona testeada
+	 */
 	private Long id;
 	/**
 	 * Atributo que representa el dni de la persona testeada.
@@ -173,12 +179,18 @@ public class PersonaTesteada implements Serializable {
 	public void setResultadoTesteo(String resultadoTesteo) {
 		this.resultadoTesteo = resultadoTesteo;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public Long getId() {
 		return id;
 	}
 
-
+/**
+ * 
+ * @param id
+ */
 	public void setId(Long id) {
 		this.id = id;
 	}

@@ -1,12 +1,11 @@
 package ar.edu.unju.fi.trackpersonas.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
 import ar.edu.unju.fi.trackpersonas.model.Barrio;
 
-public interface IBarrioDAO {
 
-	public void guardar();
-	public Barrio mostrar();
-	public void eliminar();
-	public Barrio modificar();
-	
+public interface IBarrioDAO extends JpaRepository<Barrio, Long>{
+
 }
