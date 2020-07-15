@@ -1,10 +1,10 @@
 package ar.edu.unju.fi.tracking.services;
 
-import java.awt.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.testeos.model.UnidadHabitacional;
@@ -14,48 +14,43 @@ import ar.edu.unju.fi.testeos.repository.IUnidadHabitacionalDAO;
 public class IUnidadHabitacionalServiceImp implements IUnidadHabitacionalService {
 
 		@Autowired
-		@Qualifier("unidadHabitacionalDaoImp")
-		private IUnidadHabitacionalDAO unidadHabitacionalDaoImp;
-
-		@Override
-		public void crear(UnidadHabitacional unidadHabitacional) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public UnidadHabitacional modificar() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void eliminar() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public List listar() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Optional<UnidadHabitacional> encontrarUnidadHabitacional(Long id) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+		 IUnidadHabitacionalDAO unidadHabitacionalDao;
 
 		@Override
 		public void guardar(UnidadHabitacional unidadHabitacional) {
-			// TODO Auto-generated method stub
+			unidadHabitacionalDao.save(unidadHabitacional);
+			System.out.println(unidadHabitacional.getDireccion());
+			System.out.println("Se registro la direccion correcta!!!!");
 			
 		}
 
 		@Override
-		public UnidadHabitacional modificar(UnidadHabitacional unidadHabitacional) {
+		public UnidadHabitacional modificar(UnidadHabitacional unidadHabitacional) throws Exception {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+		@Override
+		public Iterable<UnidadHabitacional> listarunidadHabitacionales() {
+			return unidadHabitacionalDao.findAll();
+		}
+
+		@Override
+		public void eliminar(Long id) {
+			unidadHabitacionalDao.deleteById(id);
+			
+		}
+
+		@Override
+		public Optional<UnidadHabitacional> buscarUnidadHabitacional(Long id) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public UnidadHabitacional encontrarUnidadHabitacional(Long id) throws Exception {
+			return unidadHabitacionalDao.findById(id).orElseThrow(()-> new Exception("La direccion no existe"));
+		}
 }
+
+	

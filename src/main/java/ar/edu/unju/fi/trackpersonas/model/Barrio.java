@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
 /**
  * Clase que representa el nombre de un barrio 
  * cualquiera dentro de una cuidad.
- * @author Torrejon Cristian
+ * @author GRUPO16
  * @version 1.0
  */
 @Entity
@@ -40,6 +41,7 @@ public class Barrio implements Serializable {
 	 */
 	
 	@Column(name = "NOMBRE")
+	@NotBlank
 	private String nombre; 
 
 	

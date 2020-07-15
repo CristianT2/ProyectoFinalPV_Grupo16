@@ -1,10 +1,10 @@
 package ar.edu.unju.fi.tracking.services;
 
-import java.awt.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tracking.model.Usuario;
@@ -12,58 +12,48 @@ import ar.edu.unju.fi.tracking.repository.IUsuarioDAO;
 @Service
 public class IUsuarioServiceImp implements IUsuarioService{
 	@Autowired
-	@Qualifier("usuarioDaoImp")
-	private IUsuarioDAO usuarioDaoImp;
+	IUsuarioDAO usuarioDao;
 
 	@Override
 	public void guardar(Usuario usuario) {
-		// TODO Auto-generated method stub
-		usuarioDaoImp.save(usuario);
+	usuarioDao.save(usuario);
+	System.out.println(usuario.getApellidoReal());
+	System.out.println("Se registro el usuario correcto!!!!");
 	}
 
 	@Override
-	public Usuario modificar(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-	public void mostrar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	public void eliminar(Usuario usuario) {
-}
-
-	@Override
-	public void crear(Usuario usuario) {
-		// TODO Auto-generated method stub
-		
+	public Optional<Usuario> buscarUsuario(Long id) {
+	// TODO Auto-generated method stub
+	return null;
 	}
 
 	@Override
-	public Usuario modificar() {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterable<Usuario> listarUsuarios() {
+	return usuarioDao.findAll();
 	}
 
 	@Override
-	public void eliminar() {
-		// TODO Auto-generated method stub
-		
+	public void eliminar(Long id) {
+	usuarioDao.deleteById(id);
+
 	}
 
 	@Override
-	public List listar() {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario encontrarUsuario(Long id) throws Exception {
+	return usuarioDao.findById(id).orElseThrow(()-> new Exception("El Usuario no existe"));
 	}
 
 	@Override
-	public Optional<Usuario> encontrarUsuario(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario modificar(Usuario usuario)throws Exception {
+	Usuario usuarioGuardar = encontrarUsuario(usuario.getId());
+	mapearUsuario(usuario, usuarioGuardar);
+	return usuarioDao.save(usuarioGuardar);
 	}
+	public void mapearUsuario(Usuario desde, Usuario hacia) {
+		hacia.setApellidoReal(desde.getApellidoReal());
+		hacia.setNombreReal(desde.getNombreReal());
+		hacia.setNombreUsuario(desde.getNombreUsuario());
+		hacia.setPassword(desde.getPassword());
+		hacia.setTipoUsuario(desde.getTipoUsuario());
+		}
 }

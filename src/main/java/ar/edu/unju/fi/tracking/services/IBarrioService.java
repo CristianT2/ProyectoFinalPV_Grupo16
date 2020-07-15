@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.tracking.services;
 
-import java.awt.List;
+
+import java.util.List;
 import java.util.Optional;
 
 
@@ -8,13 +9,15 @@ import ar.edu.unju.fi.trackpersonas.model.Barrio;
 
 public interface IBarrioService {
 	
-		public void crear(Barrio barrio);
-		public Barrio modificar();
-		public void eliminar();
-		public List listar();
-		public Optional<Barrio> encontrarBarrio(Long id);
-		void guardar(Barrio barrio);
-		Barrio modificar(Barrio barrio);
+		public void guardar(Barrio barrio);
+		public Barrio modificar(Barrio barrio) throws Exception;
+		public Iterable<Barrio> listarBarrios();
+		public void eliminar(Long id);
+
+		public Optional<Barrio>buscarBarrio(Long id);
+		public Barrio encontrarBarrio(Long id) throws Exception;
+		public List<Barrio> getAllBarrios();
 	}
+
 
 

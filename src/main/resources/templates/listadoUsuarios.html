@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -8,10 +8,39 @@
 <body class="container">
 <div th:insert="layout/header :: header"></div>
 <a th:href="@{/usuarios}" class="btn btn-danger">Agregar Usuario</a>
-<div><h1>LISTADO DE USUARIOS</h1></div>
+<div>
+<h1>LISTADO DE USUARIOS</h1>
+
+<table class="table">
+<thead class="thead-dark">
+<tr>
+<th scope="col">#</th>
+<th scope="col">Usuario</th>
+<th scope="col">Password</th>
+<th scope="col">Nombre</th>
+<th scope="col">Apellido</th>
+<th scope="col">Tipo de Usuarios</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="usuario: ${listaUsuarios}" class="table-danger">
+<th scope="row" th:text="${usuario.id}"></th>
+<td th:text="${usuario.nombreUsuario}"></td>
+<td th:text="${usuario.password}"></td>
+<td th:text="${usuario.nombreReal}"></td>
+<td th:text="${usuario.apellidoReal}"></td>
+<td th:text="${usuario.tipoUsuario}"></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
 <div th:insert="layout/footer :: footer"></div>
-  <script type="text/javascript" href="webjars/jquery/3.5.1/jquery.min.js"></script>
-  <script type="text/javascript" href="webjars/popper.js/1.16.0/popper.min.js"></script>
-  <script type="text/javascript" href="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="webjars/popper.js/1.16.0/popper.min.js"></script>
+<script type="text/javascript" src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 </html>

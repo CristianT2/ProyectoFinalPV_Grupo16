@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
 	<div id="header" th:fragment="header">
-		<nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light">
+		<nav
+			class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="#">Testeo Web</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
@@ -20,19 +21,25 @@
 					<li class="nav-item"><a class="nav-link" th:href="@{/home}">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/listadoUsuarios}">Usuarios</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/barrio}">Barrios</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/formulario}">Formularios</a></li>
-				
+					<li class="nav-item"><a class="nav-link" href="usuarioForm">Usuarios</a></li>
+					<li class="nav-item"><a class="nav-link" href="barrioForm">Barrios</a></li>
+					<!--<li class="nav-item"><a class="nav-link" th:href="@{/formulario}">Formularios</a></li>-->
+
+					<li class="nav-item"><a class="nav-link"
+						th:href="registroTesteoForm">Registro Testeo</a></li>
+					
+
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
 					<input class="form-control mr-sm-2" type="search"
 						placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form>
+				<a th:href="@{/login}" class="btn btn-danger">Acceder</a>
 			</div>
 		</nav>
 	</div>
 
 </body>
 </html>
+

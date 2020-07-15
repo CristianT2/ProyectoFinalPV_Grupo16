@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  *  Clase que representa a una persona testeada
  * durante la pandemia para saber si dicha persona
  * se contagio de covid-19.
- * @author Mamani Cinthia Agustina
+ * @author GRUPO16
  * @version 1.0
  */
 
@@ -34,7 +34,20 @@ public class PersonaTesteada implements Serializable {
 	 *---------------------------------
 	 */
 	 
-	 
+	 /*
+	  * @Id
+@GeneratedValue(strategy= GenerationType.IDENTITY)
+@Column(name="per_testeada_id")
+private Long id;
+@Column(name="per_testeada_documento")
+private String documento;
+@Column(name="per_testeada_apellido")
+private String apellido;
+@Column(name="per_testeada_nombre")
+private String nombres;
+@Column(name="per_testeada_resultado")
+private String resultadoTesteo;
+	  */
 	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name= "REGISTRO_TESTEO")
 	/**
@@ -196,7 +209,7 @@ public class PersonaTesteada implements Serializable {
 	}
 
 
-	//Metodo que retorna una cadena de texto con los valores de los atributos
+	//Metodo que retorna u na cadena de texto con los valores de los atributos
 	@Override
 	public String toString() {
 		return "PersonaTesteada [documento=" + documento + ", apellido=" + apellido + ", nombres=" + nombres

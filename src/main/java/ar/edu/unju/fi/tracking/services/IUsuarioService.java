@@ -1,16 +1,17 @@
 package ar.edu.unju.fi.tracking.services;
 
-import java.awt.List;
+
 import java.util.Optional;
 
 import ar.edu.unju.fi.tracking.model.Usuario;
 
+
 public interface IUsuarioService {
-	public void crear(Usuario usuario);
-	public Usuario modificar();
-	public void eliminar();
-	public List listar();
-	public Optional<Usuario> encontrarUsuario(Long id);
-	void guardar(Usuario usuario);
-	Usuario modificar(Usuario usuario);
+	public void guardar(Usuario usuario);
+	public Usuario modificar(Usuario usuario) throws Exception;
+	public Iterable<Usuario> listarUsuarios();
+	public void eliminar(Long id);
+	public Optional<Usuario>buscarUsuario(Long id);
+	public Usuario encontrarUsuario(Long id) throws Exception;
+	
 }

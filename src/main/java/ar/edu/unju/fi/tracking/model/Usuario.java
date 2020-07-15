@@ -8,13 +8,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
 /**
  * Clase que representa a un usuario que se registrara 
  * y debera completar los campos requeridos y obligatorios.
- * @author Torrejon Cristian
+ * @author GRUPO16   
  * @version 1.0
  */
 @Component
@@ -30,6 +32,7 @@ import org.springframework.stereotype.Component;
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	@Column(name = "ID")
 	private Long id;
 	/**
@@ -41,21 +44,26 @@ import org.springframework.stereotype.Component;
 	 * Atributo que representa el password del Usuario.
 	 */
 	@Column (name = "PASSWORD")
+	@NotBlank
+	@Size(min=8, message= "Su contraseña tiene que tener como minimo 8 caracteres")
 	private String password;
 	/**
 	 * Atributo que representa el nombre real del Usuario.
 	 */
 	@Column(name = "NOMBRE_REAL")
+	@NotBlank
 	private String nombreReal;
 	/**
 	 * Atributo que representa el apellido real del Usuario.
 	 */
 	@Column (name = " APELLIDO_REAL")
+	@NotBlank ( message = " El apellido no puede quedar en blanco")
 	private String apellidoReal;
 	/**
 	 * Atributo que representa el tipo de Usuario.
 	 */
 	@Column(name = "TIPO_DE_USUARIO")
+	@NotBlank
 	private String tipoUsuario;     //Consultor-Registrador-Bd
 	
 	/*
@@ -72,11 +80,12 @@ import org.springframework.stereotype.Component;
 
 	/**
 	 * Constructor Parametrizado
-	 * @param nombreUsuario Valor para el nombre del usuario
-	 * @param password Valor para el password del usuario
-	 * @param nombreReal Valor para el nombre real del usuario
-	 * @param apellidoReal Valor para el apellido real del usuario
-	 * @param tipoUsuario Valor para el tipo de usuario
+	 *Se crea cinco constructores
+	 * @param nombreUsuario Valor para el nombreUsuario del usuario(un parametro para inicializar nombreUsuario)
+	 * @param password Valor para el password del usuario (un parametro para inicializar password)
+	 * @param nombreReal Valor para el nombre real del usuario ( un parametro para inicializar nombreReal)
+	 * @param apellidoReal Valor para el apellido real del usuario (un parametro para inicializar apellidoReal)
+	 * @param tipoUsuario Valor para el tipo de usuario (un parametro para inicializar tipoUsuario)
 	 */
 	public Usuario(String nombreUsuario, String password, String nombreReal, String apellidoReal, String tipoUsuario) {
 		//asignacion del parametro nombreUsuario al atributo nombreUsuario.
@@ -98,8 +107,8 @@ import org.springframework.stereotype.Component;
 	 */
 	
 	/**
-	 * retorna el nombre del usuario
-	 * @return the nombreUsuario
+	 * Metodo que muestra nombreUsuario
+	 * @return Retorna nombreUsuario tipo String
 	 */
 	public String getNombreUsuario() {
 		return nombreUsuario;
@@ -176,16 +185,22 @@ import org.springframework.stereotype.Component;
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-
+/**
+ * Metodo que muestra id de Usuario 
+ * @return Retorna id de tipo Long
+ */
 	public Long getId() {
 		return id;
 	}
-
+/**
+ * Metodo que setea un valor a atributo id
+ * @param id
+ */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	//Metodo que retorna una cadena de texto con los valores de los atributos
+	// Metodo que retorna una cadena de texto con los valores de los atributos
 	@Override
 	public String toString() {
 		return "Usuario [nombreUsuario=" + nombreUsuario + ", password=" + password + ", nombreReal=" + nombreReal

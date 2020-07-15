@@ -13,18 +13,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
  * Clase que representa el registro de los testeos 
  * hechos a una persona
- * @author Torrejon Cristian
+ * @author GRUPO16
  * @version 1.0
  */
+
+/* 
+
+@Autowired
+@OneToOne(cascade = {CascadeType.ALL})
+@JoinColumn(name="unidad_habitacional_id")
+private UnidadHabitacional unidadHabitacional;
+
+@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+@JoinColumn(name="registro_testeo_id")
+private List<PersonaTesteada> personasTesteadas= new ArrayList<PersonaTesteada>();
+
+*/
 
 @Component
 @Entity
@@ -49,7 +64,8 @@ private static final long serialVersionUID = 1L;
 	/**
 	 * Atributo que representa la vivienda dentro del registro de testeo.
 	 */
-    @ManyToOne(fetch = FetchType.LAZY)
+	@Autowired
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn ( name = "UNIDAD_HABITACIONAL")
 	private UnidadHabitacional unidadHabitacional;
 	/**
@@ -59,7 +75,7 @@ private static final long serialVersionUID = 1L;
 	//@Autowired
     @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER )
 	private List<PersonaTesteada> personasTesteadas = new ArrayList<PersonaTesteada>();
-	
+	 
 	/*
 	 *---------------------------------
 	 *-------- constructores --------------

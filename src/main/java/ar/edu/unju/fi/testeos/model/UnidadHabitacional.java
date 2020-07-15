@@ -9,33 +9,52 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ar.edu.unju.fi.trackpersonas.model.Barrio;
 
 /**
  * Clase que representa una vivienda ubicada en una ciudad cualquiera.
- * @author Torrejon Cristian
+ * 
+ * @author GRUPO16
  * @version 1.0
  */
 
 @Component
 @Entity
-@Table (name = "UNIDAD_HABITACIONALES")
+@Table(name = "UNIDAD_HABITACIONALES")
 public class UnidadHabitacional implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	/*
-	 *---------------------------------
-	 *-------- atributos --------------
-	 *---------------------------------
+	 * --------------------------------- -------- atributos --------------
+	 * ---------------------------------
 	 */
-	
+
 	/**
 	 * Atributo que representa la direccion de una vivienda.
+	 */
+	/*
+	 * @Id
+	 * 
+	 * @GeneratedValue(strategy= GenerationType.IDENTITY)
+	 * 
+	 * @Column(name="unidad_hab_id") private Long id;
+	 * 
+	 * @Column(name="unidad_hab_direccion") private String direccion;
+	 * 
+	 * @Autowired
+	 * 
+	 * @OneToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name="barrio_id", nullable = true) private Barrio barrio;
+	 * 
+	 * @OneToOne(mappedBy = "unidadHabitacional", fetch = FetchType.LAZY) private
+	 * RegistroTesteo registroTesteo;
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,14 +65,16 @@ public class UnidadHabitacional implements Serializable {
 	/**
 	 * Atributo que representa el barrio donde esta ubicada de una vivienda.
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "BARRIO" , nullable = false )
+	@Autowired
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "BARRIO", nullable = false)
 	private Barrio barrio;
-	
+	@OneToOne(mappedBy = "unidadHabitacional", fetch = FetchType.LAZY)
+	private RegistroTesteo registroTesteo;
+
 	/*
-	 *---------------------------------
-	 *-------- constructores --------------
-	 *---------------------------------
+	 * --------------------------------- -------- constructores --------------
+	 * ---------------------------------
 	 */
 	/**
 	 * Constructor por defecto
@@ -64,24 +85,25 @@ public class UnidadHabitacional implements Serializable {
 
 	/**
 	 * Constructor parametrizado
+	 * 
 	 * @param direccion valor de la direccion de una casa
-	 * @param barrio valor del barrio donde esta una casa
+	 * @param barrio    valor del barrio donde esta una casa
 	 */
 	public UnidadHabitacional(String direccion, Barrio barrio) {
-		//asignacion del parametro direccion al atributo direccion.
+		// asignacion del parametro direccion al atributo direccion.
 		this.direccion = direccion;
-		//asignacion del parametro barrio al atributo barrio.
+		// asignacion del parametro barrio al atributo barrio.
 		this.barrio = barrio;
 	}
 
 	/*
-	 *---------------------------------
-	 *-------- metodos accesores --------------
-	 *---------------------------------
+	 * --------------------------------- -------- metodos accesores --------------
+	 * ---------------------------------
 	 */
-	
+
 	/**
 	 * retorna la direccion de la vivienda.
+	 * 
 	 * @return the direccion
 	 */
 	public String getDireccion() {
@@ -90,6 +112,7 @@ public class UnidadHabitacional implements Serializable {
 
 	/**
 	 * asingna un valor a la direccion de la vivienda.
+	 * 
 	 * @param direccion the direccion to set
 	 */
 	public void setDireccion(String direccion) {
@@ -98,6 +121,7 @@ public class UnidadHabitacional implements Serializable {
 
 	/**
 	 * retorna el barrio de la vivienda.
+	 * 
 	 * @return the barrio
 	 */
 	public Barrio getBarrio() {
@@ -106,6 +130,7 @@ public class UnidadHabitacional implements Serializable {
 
 	/**
 	 * asigna un valor al barrio de la vivienda.
+	 * 
 	 * @param barrio the barrio to set
 	 */
 	public void setBarrio(Barrio barrio) {
@@ -120,10 +145,10 @@ public class UnidadHabitacional implements Serializable {
 		this.id = id;
 	}
 
-	//Metodo que retorna una cadena de texto con los valores de los atributos
+	// Metodo que retorna una cadena de texto con los valores de los atributos
 	@Override
 	public String toString() {
 		return "UnidadHabitacional [direccion=" + direccion + ", barrio=" + barrio + "]";
 	}
-	
+
 }
