@@ -39,6 +39,7 @@ import org.springframework.stereotype.Component;
 	 * Atributo que representa el nombre del Usuario.
 	 */
 	@Column (name = " NOMBRE ", length = 150, nullable = true)
+	@NotBlank(message="Debe ingresar un nombre de usuario")
 	private String nombreUsuario;
 	/**
 	 * Atributo que representa el password del Usuario.

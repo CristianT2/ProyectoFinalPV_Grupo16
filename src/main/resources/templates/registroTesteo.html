@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body style="background: #F1B5D3;">
+    
+	<div class="container">
+		<div th:insert="layout/header :: header"></div>
+		<!--<ul class="nav nav-tabs" role="tablist">
+ <li class="nav-item"><a id="unidad-tab"
+th:classappend="${unidadForm}" class="btn btn-danger"
+href="#unidad" data-toggle="tab" role="tab"
+aria-controls="unidad" aria-selected="false">Agregar Unidad Habitacional</a></li>
+<li class="nav-item"><a id="formulario-tab"
+th:classappend="${formTab}" class="btn btn-danger"
+href="#formulario" data-toggle="tab" role="tab"
+aria-controls="formulario" aria-selected="true">Registro Testeo</a></li>
+   <li class="nav-item"><a id="lista-tab" class="btn btn-danger"
+th:classappend="${listTab}" href="#lista" data-toggle="tab"
+role="tab" aria-controls="lista" aria-selected="false">Registros
+de Testeos Realizados</a></li>
+</ul>-->
+		<div class="tab-content">
+
+			<div class="card">
+				<div class="card-header">
+					<h4>Registro Testeo</h4>
+				</div>
+				<div class="card-body">
+					<form class="form" role="form" autocomplete="off"
+						th:object="${registroTesteo}"
+						th:action="${editMode}?@{/editarUsuario}:@{/registroTesteoForm}"
+						method="post">
+
+						<!-- es necesario para pasar la validacion -->
+						<input class="form-control" type=hidden
+							th:field="${registroTesteo.id}" th:if="${editMode}" /> <input
+							class="form-control" type=hidden
+							th:field="${unidadHabitacional.id}" th:if="${editMode}" />
+						<div class="col">
+							<div class="form-group row">
+								<label class="col-lg-3 col-form-label form-control-label">Direccion:</label>
+								<div class="col-lg-9">
+									<input class="form-control" type="text"
+										th:field="${registroTesteo.unidadHabitacional.direccion}">
+									<!--  <div class="alert-danger"
+th:if="${#fields.hasErrors('direccion')}"
+th:errors="*{direccion}">Direccion Error</div>-->
+								</div>
+							</div>
+							<div class="form-group row" th:object="${barrio}">
+								<label class="col-lg-3 col-form-label form-control-label">Barrio</label>
+								<div class="col-lg-9">
+									<select th:field="${registroTesteo.unidadHabitacional.barrio}"
+										class="custom-select my-1 mr-sm-2">
+										<!--  <option selected >Elegir Barrio...</option>-->
+										<option th:each="barrio : ${listaBarrios}"
+											th:value="${barrio.id}" th:text="${barrio.nombre}">
+										</option>
+									</select>
+									<!--  <div class="alert-danger"
+th:if="${#fields.hasErrors('barrio')}"
+th:errors="*{barrio}">Barrio Error</div>-->
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+						<div class="card-header">
+							<h4>Cargar Personas Testeadas</h4>
+						</div>
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-success" data-toggle="modal"
+							data-target="#exampleModal">Cargar Personas</button>
+
+						<div class="form-group row">
+							<div class="col-lg-12 text-center">
+								<a class="btn btn-secondary"
+									th:href="@{'/cancelarRegistroTesteo'}">Cancelar</a>
+								<button type="button" class="btn btn-success"
+									data-toggle="modal" data-target="#modalAgregar">Guardar</button>
+							</div>
+						</div>
+						<div class="alert-danger text-center"
+							th:if="${formRegistroTesteoErrorMessage}"
+							th:text="${formRegistroTesteoErrorMessage}">Error</div>
+
+						<!-- Modal Agregar -->
+						<div class="modal fade" id="modalAgregar" tabindex="-1"
+							role="dialog" aria-labelledby="agregarModalTitulo"
+							aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="agregarModalTitulo">Confirmar
+											Agregar</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cerrar</button>
+										<input type="submit" class="btn btn-danger"
+											value="Guardar Cambios"
+											th:value="${editMode}?'Guardar Unidad':'Crear Unidad'">
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+
+				</div>
+			</div>
+
+
+			<!-- Modal Persona-->
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Agregar
+								Persona</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form class="form" role="form" autocomplete="off">
+								<div class="col">
+									<div class="form-group row">
+										<label for="dni">DNI</label> <input type="number"
+											class="form-control" id="dni" placeholder="99.999.999"
+											required>
+									</div>
+									<div class="form-group row">
+										<label for="nombre">Nombre</label> <input type="text"
+											class="form-control" id="nombre" placeholder="Nombre"
+											required>
+									</div>
+									<div class="form-group row">
+										<label for="apellido">Apellido</label> <input type="text"
+											class="form-control" id="apellido" placeholder="Apellido"
+											required>
+									</div>
+									<div class="form-group row"
+										th:if="${editMode==null or editMode==false}">
+										<label class="col-lg-3 col-form-label form-control-label">Resultado
+											Testeo:</label>
+										<div class="col-lg-9">
+											<div class="form-check">
+												<input class="form-check-input" type="radio"
+													name="gridRadios" id="gridRadios1" value="Positivo"
+													checked="checked"> <label class="form-check-label"
+													for="gridRadios1">Positivo</label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="radio"
+													name="gridRadios" id="gridRadios2" value="Negativo">
+												<label class="form-check-label" for="gridRadios2">Negativo</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Cerrar</button>
+							<button type="button" class="btn btn-danger">Guardar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--  <div class="tab-pane fade show" id="lista" role="tabpanel"
+th:classappend="${listTab}" aria-labelledby="lista-tab">
+<div class="card">
+<div class="card-header">
+<h4>Listado de Usuarios</h4>
+</div>
+<div class="card-body">
+<table id="usuarioList"
+class="table table-bordered table-hover table-striped">
+<thead class="thead-dark">
+<tr>
+<th scope="col">#</th>
+<th scope="col">Usuario</th>
+<th scope="col">Password</th>
+<th scope="col">Apellido</th>
+<th scope="col">Nombre</th>
+<th scope="col">Tipo de Usuario</th>
+<th scope="col">Accion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="table-danger" th:each="usuario : ${listaUsuarios}">
+<td th:text="${usuario.id}"></td>
+<td th:text="${usuario.nombreUsuario}"></td>
+<td th:text="${usuario.password}"></td>
+<td th:text="${usuario.nombreReal}"></td>
+<td th:text="${usuario.apellidoReal}"></td>
+<td th:text="${usuario.tipoUsuario}"></td>
+<td><a href="#"
+th:href="@{'/editarUsuario/'+${usuario.id}}"> <i
+class="fa fa-edit"></i>
+</a> | <a href="#"
+th:onclick="'javascript:confirmarEliminar(\''+${usuario.id}+'\');'"><i
+class="fa fa-trash-alt"></i> </a></td>
+</tr>
+</tbody>
+</table>
+<div class="alert-danger text-center"
+th:if="${listUsuarioErrorMessage}"
+th:text="${listUsuarioErrorMessage}">Name Error</div>
+
+
+<script type="text/javascript">
+function confirmarEliminar(id) {
+$('#modalEliminar').modal('show');
+$("#identificadorUsuarioHiddenInput").val(id);
+}
+
+function eliminarBarrio() {
+var id = $("#identificadorUsuarioHiddenInput")
+.val();
+window.location = "eliminarUsuario/" + id;
+}
+</script>
+
+
+
+<div class="modal fade" id="modalEliminar" tabindex="-1"
+role="dialog" aria-labelledby="eliminarModalTitulo"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="eliminarModalTitulo">Confirmar
+Eliminar</h5>
+<button type="button" class="close" data-dismiss="modal"
+aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<h6>Desea eliminar Usuario?</h6>
+</div>
+<input type="hidden" id="identificadorUsuarioHiddenInput"
+name="barrioIdHiddenInput" />
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary"
+data-dismiss="modal">Cerrar</button>
+<button type="button" class="btn btn-danger"
+th:onclick="eliminarUsuario()">Eliminar Usuario</button>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>-->
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+		<div th:insert="layout/footer :: footer"></div>
+		<script type="text/javascript"
+			src="webjars/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript"
+			src="webjars/popper.js/1.16.0/popper.min.js"></script>
+		<script type="text/javascript"
+			src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	</div>
+
+</body>
+</html>
+

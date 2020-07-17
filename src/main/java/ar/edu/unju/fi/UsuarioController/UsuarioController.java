@@ -79,18 +79,15 @@ public class UsuarioController {
 
 	@GetMapping("/editarUsuario/{id}")
 	public String obtenerFormularioEditarUsuario(Model model, @PathVariable(name="id") Long id) throws Exception {
-	try {
+	
 	Usuario usuarioEncontrado = usuarioService.encontrarUsuario(id);
-	model.addAttribute("usuario", usuarioEncontrado);
+	model.addAttribute("usuarioForm", usuarioEncontrado);
+	
 	model.addAttribute("editMode", "true");
-	}
-	catch (Exception e) {
-	model.addAttribute("formUsuarioErrorMessage",e.getMessage());
-	model.addAttribute("usuario", usuario);
-	model.addAttribute("editMode", "false");
-	}
 	model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());
 	model.addAttribute("formTab", "active");
+	model.addAttribute("editMode", "true");
+	
 	return "usuarios";
 	}
 
@@ -98,27 +95,26 @@ public class UsuarioController {
 	public String postEditarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, ModelMap model) {
 	if(result.hasErrors()) {
 	//si da error el objeto recibido se vuelve a enviar a la vista
-	model.addAttribute("usuario", usuario);
+	model.addAttribute("usuarioForm", usuario);
 	model.addAttribute("formTab", "active");
 	model.addAttribute("editMode", "true");
 	} else {
 	try {
 	usuarioService.modificar(usuario);
-	model.addAttribute("usuario", usuario);
+	model.addAttribute("usuarioForm", usuario);
 	model.addAttribute("listTab", "active");
 	model.addAttribute("editMode", "false");
 	} catch (Exception e) {
 	// TODO Auto-generated catch block
 	// pasar las excepciones al html
 	model.addAttribute("formUsuarioErrorMessage",e.getMessage());
-	model.addAttribute("usuario", usuario);
+	model.addAttribute("usuarioForm", usuario);
 	model.addAttribute("formTab", "active");
 	model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());
 	model.addAttribute("editMode", "true");
 	}
 	}
 	model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());
-	return "usuarioForm";
+	return "usuarios";
 	}
-}
-
+	}

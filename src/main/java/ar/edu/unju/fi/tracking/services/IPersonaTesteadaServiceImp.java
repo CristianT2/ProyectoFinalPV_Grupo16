@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.tracking.services;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,18 @@ public class IPersonaTesteadaServiceImp implements IPersonaTesteadaService {
 		hacia.setNombres(desde.getNombres());
 		hacia.setResultadoTesteo(desde.getResultadoTesteo());
 
+	}
+
+
+	@Override
+	public PersonaTesteada byFindDniPersonaTesteada(String documento) throws Exception {
+		return personaTesteadaDao.findByDocumento(documento).orElseThrow(() -> new Exception("No existe persona testeada"));
+	}
+
+
+	@Override
+	public List<PersonaTesteada> byFindApellidoPersonas() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

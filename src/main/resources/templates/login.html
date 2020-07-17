@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Inicio de Sesion</title>
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body style="background: purple;">
+	<header>
+		<div class="container" style="margin-left: 500px">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header text-center">
+						<h4>Login de Usuario</h4>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/login}" name="formLogin" class="form-signin"
+							method="post" th:object="${usuarioForm}">
+							<div class="form-group">
+								<label for="idUsuario">Usuario</label> <input id="idUsuario"
+									name="username" class="form-control" type="text"
+									placeholder="Ingrese Usuario">
+							</div>
+							<div class="form-group">
+								<label for="idContraseña">Contraseña</label> <input
+									id="idContraseña" name="password" class="form-control"
+									type="password" placeholder="Ingrese Contraseña">
+							</div>
+							<div align="center" th:if="${param.error}">
+								<p style="font-size: 20; color: #FF1C19;">Usuario o
+									Contraseña incorrectos</p>
+							</div>
+							<div class="form-group">
+								<button type="submit" name="Submit" value="Login"
+									class="btn btn-success btn-block" th:text="Ingresar"></button>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div th:if="${param.logout}" class="alert alert-success" role="alert">Ha
+				salido del sistema!!!</div>
+		</div>
+	</header>
+
+	<script type="text/javascript">
+function validate() {
+if (login.formLogin.username.value == "" && login.formLogin.password.value == "") {
+alert("Ingrese el usuario y la contraseña");
+login.formLogin.username.focus();
+return false;
+}
+if (login.formLogin.username.value == "") {
+alert("Ingrese el usuario");
+login.formLogin..username.focus();
+return false;
+}
+if (login.formLogin.password.value == "") {
+alert("Ingrese la Contraseña");
+login.formLogin.password.focus();
+return false;
+}
+}
+</script>
+
+
+	<script type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="webjars/popper.js/1.16.0/popper.min.js"></script>
+	<script type="text/javascript"
+		src="webjars/bootstrap/4.5.0/js/bootstarp.min.js"></script>
+</body>
+</html>

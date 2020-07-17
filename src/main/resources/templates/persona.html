@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body style="background: #F1B5D3;">
+<div class="container">
+<div th:insert="layout/header :: header"></div>
+<div class="card">
+<div class="card-header">
+<h4>Persona</h4>
+</div>
+<div class="card-body">
+<form th:action="@{/buscarPersona}" th:object="${personaTesteada}"
+method="post" class="form" role="form" autocomplete="off">
+<div class="form-group row">
+<div class="col-lg-9">
+<label class="col-lg-3 col-form-label form-control-label">D.N.I:</label>
+<input th:field="${personaTesteada.documento}" type="text"
+class="form-group form-control" placeholder="dni"> <a type="submit"
+class="btn btn-success">Buscar</a>
+</div>
+</div>
+</form>
+</div>
+</div>
+
+
+<div class="alert-danger text-center" th:if="${error}"
+th:text="${error}">Error busqueda personas testeada</div>
+<div th:if="${activo==true}"
+class="col-sm-12 mt-5 d-flex table-responsive-xl">
+<div class="col-auto mx-auto min-width-0">
+<div class="card shadow-sm border-info">
+<h2 class="card-header text-center font-weight-normal">Persona
+Testeada</h2>
+<div class="card-body">
+<table class="table table-bordered table-hover table-striped">
+<thead class="thead-dark">
+<tr>
+<th scope="col">Documento</th>
+<th scope="col">Apellido</th>
+<th scope="col">Nombre</th>
+<th scope="col">Resultado Testeo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="table-danger" th:each="per : ${persona}">
+<td th:text="${per.documento}"></td>
+<td th:text="${per.apellido}"></td>
+<td th:text="${per.nombres}"></td>
+<td th:text="${per.resultadoTesteo}"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div th:insert="layout/footer :: footer"></div>
+<script type="text/javascript"
+src="webjars/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript"
+src="webjars/popper.js/1.16.0/popper.min.js"></script>
+<script type="text/javascript"
+src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</div>
+
+</body>
+</html>

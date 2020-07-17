@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.tracking.services;
 
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -62,4 +63,6 @@ public class IBarrioServiceImp implements IBarrioService {
 		// TODO Auto-generated method stub
 		return barrioDao.findAll();
 	}
+
+	
 }

@@ -6,8 +6,8 @@
 <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
 <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 </head>
-<body>
-	<div class="container">
+<body style="background: #F1B5D3;">
+	<div class="container"  >
 		<div th:insert="layout/header :: header"></div>
 		<ul class="nav nav-tabs" role="tablist">
 			<li class="nav-item">
@@ -92,6 +92,8 @@
 								<tr class="table-danger" th:each="barrio : ${listaBarrios}">
 									<td th:text="${barrio.id}"></td>
 									<td th:text="${barrio.nombre}"></td>
+								
+								
 									<td><a href="#" th:href="@{'/editarBarrio/'+${barrio.id}}">
 									<i class="fa fa-edit"></i></a> | 
 									<a href="#" th:onclick="'javascript:confirmarEliminar(\''+${barrio.id}+'\');'"><i class="fa fa-trash-alt"></i>

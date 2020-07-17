@@ -37,7 +37,7 @@ class ProyectoFinalPvGrupo16ApplicationTests {
 	void feto() {
 		PersonaTesteada persona = new PersonaTesteada("335", "dominsd", "car", "negativo");
 		List<Barrio> barrios = new ArrayList<Barrio>();
-		barrios = barrioService.getAllBarrios();
+		/* barrios = barrioService.getAllBarrios(); */
 		UnidadHabitacional unidad = new UnidadHabitacional("direccion", barrios.get(1));
 		personaService.guardar(persona);
 		unidadHabitacionalService.guardar(unidad);
